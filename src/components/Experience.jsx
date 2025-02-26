@@ -327,7 +327,7 @@ function Experience() {
 
               <div className="experience-cta">
                 <a 
-                  href="/assets/documents/professional-resume.pdf" 
+                  href="" 
                   className="btn btn-outline-primary"
                   onClick={handleDownloadResume}
                   aria-label="Download my resume in PDF format"

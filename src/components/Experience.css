@@ -3,7 +3,7 @@
   position: relative;
   padding: 120px 0;
   overflow: hidden;
-  background-color: #f9fafb;
+  background-color: #1c8eff;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -15,7 +15,7 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: linear-gradient(45deg, rgba(247, 250, 255, 0.05) 0%, rgba(255, 105, 105, 0.01) 100%);
+  background: linear-gradient(45deg, rgba(14, 102, 255, 0.05) 0%, rgba(90, 71, 255, 0.01) 100%);
   z-index: 0;
 }
 
@@ -49,7 +49,7 @@
 .red-line {
   width: 50px;
   height: 3px;
-  background-color: #f0f6ff;
+  background-color: #ff4e3e;
   margin-right: 15px;
   transition: width 0.3s ease;
 }
@@ -110,8 +110,8 @@
 }
 
 .btn-outline-primary {
-  border: 2px solid #3b82f6;
-  color: #3b82f6;
+  border: 2px solid #ff4e3e;
+  color: #ff4e3e;
   background: transparent;
   padding: 14px 28px;
   font-weight: 600;
@@ -131,7 +131,7 @@
   left: 0;
   width: 0;
   height: 100%;
-  background-color: #3b82f6;
+  background-color: #ff4e3e;
   transition: width 0.3s ease;
   z-index: -1;
 }
@@ -140,7 +140,7 @@
 .btn-outline-primary:focus {
   color: white;
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 10px 20px rgba(255, 55, 24, 0.2);
   outline: none;
 }
 
@@ -380,7 +380,7 @@
 
 .tab-content {
   position: relative;
-  background-color: white;
+  background-color: transparent;
   border-radius: 16px;
   transition: opacity 0.3s ease;
   margin-bottom: 20px;
