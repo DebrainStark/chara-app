@@ -1,0 +1,14 @@
+/* Fixed Header Styles */
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999999; /* Ensure the header stays above other content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+  }
+  
+  /* Add padding to the body to prevent content from being hidden behind the fixed header */
+  body {
+    padding-top: 70px; /* Adjust this value based on the height of your header */
+  }

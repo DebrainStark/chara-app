@@ -1,0 +1,38 @@
+/* custom.css - Add any custom styles here */
+
+/* Dark background for the entire app */
+body {
+  background-color: #212529;
+}
+
+/* Hover effect for nav links */
+.text-secondary:hover {
+  color: #fff !important;
+  transition: color 0.3s ease;
+}
+
+/* Additional styling for the hero section */
+.display-3 {
+  font-weight: 700;
+}
+
+/* Brand logo styling */
+.fs-3.fw-bold {
+  letter-spacing: -1px;
+}
+
+/* Improve contrast for placeholder logos */
+.opacity-50 {
+  opacity: 0.6;
+}
+
+/* Custom button styling - closer to the orange in the design */
+.btn-danger {
+  background-color: #ff5722;
+  border-color: #ff5722;
+}
+
+.btn-danger:hover {
+  background-color: #e64a19;
+  border-color: #e64a19;
+}

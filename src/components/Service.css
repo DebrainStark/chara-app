@@ -1,0 +1,350 @@
+/* ServicesSection.css */
+.services-section, 
+.testimonials-section, 
+.clients-section, 
+.strategy-section {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+}
+
+.coll{
+    color: aliceblue
+}
+.py-lg-6 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* Services Cards */
+.service-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 87, 51, 0.3);
+}
+
+.service-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 0;
+  background-color: #ff5733;
+  transition: height 0.3s ease;
+}
+
+.service-card:hover:before {
+  height: 100%;
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  background: rgba(255, 87, 51, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  background: #ff5733;
+  color: white;
+}
+
+.service-icon i {
+  font-size: 28px;
+  color: #ff5733;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon i {
+  color: white;
+}
+
+.service-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-title {
+  color: #ff5733;
+}
+
+.service-description {
+  color: #666;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.service-link {
+  color: #ff5733;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.service-link i {
+  transition: transform 0.3s ease;
+}
+
+.service-link:hover i {
+  transform: translateX(5px);
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.quote-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 87, 51, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.quote-icon i {
+  font-size: 24px;
+  color: #ff5733;
+}
+
+.testimonial-text {
+  font-size: 18px;
+  line-height: 1.6;
+  font-style: italic;
+  color: #444;
+  margin-bottom: 25px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+}
+
+.testimonial-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 3px solid rgba(255, 87, 51, 0.2);
+}
+
+.author-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.author-title {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 0;
+}
+
+.results-highlight {
+  background: linear-gradient(to right, rgba(255, 87, 51, 0.1), rgba(255, 152, 0, 0.1));
+  border-radius: 16px;
+  border: 1px dashed rgba(255, 87, 51, 0.3);
+}
+
+/* Client Logos */
+.client-logo {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.client-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Strategy Cards */
+.strategy-card {
+  position: relative;
+  background-color: white;
+  border-radius: 16px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  text-align: center;
+  height: 100%;
+}
+
+.strategy-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.strategy-number {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 60px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.03);
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.strategy-card:hover .strategy-number {
+  color: rgba(255, 87, 51, 0.1);
+}
+
+.strategy-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 87, 51, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  transition: all 0.3s ease;
+}
+
+.strategy-card:hover .strategy-icon {
+  background: #ff5733;
+}
+
+.strategy-icon i {
+  font-size: 32px;
+  color: #ff5733;
+  transition: all 0.3s ease;
+}
+
+.strategy-card:hover .strategy-icon i {
+  color: white;
+}
+
+.strategy-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.strategy-description {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Button Styles */
+.btn-danger {
+  background-color: #ff5733;
+  border-color: #ff5733;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #e54a2a;
+  border-color: #e54a2a;
+  transform: translateY(-3px);
+}
+
+.btn i {
+  transition: transform 0.3s ease;
+}
+
+.btn:hover i {
+  transform: translateX(5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .services-section,
+  .testimonials-section,
+  .clients-section,
+  .strategy-section {
+    padding: 70px 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .services-section,
+  .testimonials-section,
+  .clients-section,
+  .strategy-section {
+    padding: 50px 0;
+  }
+  
+  .service-card,
+  .testimonial-card,
+  .strategy-card {
+    padding: 25px 20px;
+  }
+  
+  .service-title,
+  .strategy-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .testimonial-text {
+    font-size: 16px;
+  }
+  
+  .service-icon,
+  .strategy-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .service-icon i,
+  .strategy-icon i {
+    font-size: 24px;
+  }
+}
