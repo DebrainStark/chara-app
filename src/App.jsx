@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; // For any custom styles
 import Header from './components/Header';
 import Footer from './components/Footet';
-import Home from './pages/Home'; // Import Home instead of Hero
+import Home from './pages/Home';
+//import About from './pages/About'; // Import Home instead of Hero
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* Add other routes here */}
+            
+            {/* Add other routes here <Route path="/about" element={<About />} />*/}
           </Routes>
         </div>
         <Footer />

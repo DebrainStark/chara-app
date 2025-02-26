@@ -1,17 +1,31 @@
-import React, { useEffect, useState, useCallback, memo } from 'react';
+import React, { useEffect, useState, useCallback, memo, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Experience.css';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 // Memoized timeline item component for performance
 const TimelineItem = memo(({ experience, isActive }) => {
+  // Animate each achievement list item with staggered delay
+  const listVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 0.1 + (i * 0.05),
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    })
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
       exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="timeline-item"
       aria-hidden={!isActive}
     >
@@ -26,15 +40,41 @@ const TimelineItem = memo(({ experience, isActive }) => {
           <p className="timeline-description">{experience.description}</p>
           <ul className="timeline-achievements">
             {experience.achievements.map((achievement, i) => (
-              <li key={i}>
+              <motion.li 
+                key={i}
+                custom={i}
+                initial="hidden"
+                animate={isActive ? "visible" : "hidden"}
+                variants={listVariants}
+              >
                 <i className="fas fa-check-circle me-2" aria-hidden="true"></i>
                 {achievement}
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>
       </div>
     </motion.div>
+  );
+});
+
+// Experience stats component
+const ExperienceStats = memo(() => {
+  const stats = useMemo(() => [
+    { count: "10+", label: "Years experience" },
+    { count: "50+", label: "Projects completed" },
+    { count: "12+", label: "Companies worked with" }
+  ], []);
+
+  return (
+    <div className="experience-stats">
+      {stats.map((stat, index) => (
+        <div className="stat-item" key={index}>
+          <div className="count-up">{stat.count}</div>
+          <div className="stat-label">{stat.label}</div>
+        </div>
+      ))}
+    </div>
   );
 });
 
@@ -47,6 +87,7 @@ function Experience() {
   });
 
   const [activeTab, setActiveTab] = useState(0);
+  const [direction, setDirection] = useState(null);
 
   useEffect(() => {
     if (inView) {
@@ -63,7 +104,7 @@ function Experience() {
     },
   };
 
-  const experienceData = [
+  const experienceData = useMemo(() => [
     {
       year: '2015',
       position: 'Junior Digital Marketer',
@@ -193,29 +234,68 @@ function Experience() {
         'Created integrated marketing campaigns across digital and traditional channels',
       ],
     },
-  ];
+  ], []);
+
+  // Group experience entries by year for more organized display
+  const experienceByYear = useMemo(() => {
+    const grouped = {};
+    experienceData.forEach(exp => {
+      if (!grouped[exp.year]) {
+        grouped[exp.year] = [];
+      }
+      grouped[exp.year].push(exp);
+    });
+    return Object.entries(grouped).map(([year, entries]) => ({
+      year,
+      entries
+    })).sort((a, b) => b.year - a.year); // Sort by year descending
+  }, [experienceData]);
 
   // Handle keyboard navigation for tabs with memoized callback
   const handleKeyDown = useCallback((index, e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      setDirection(index > activeTab ? 'right' : 'left');
       setActiveTab(index);
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
-      setActiveTab(prev => Math.min(prev + 1, experienceData.length - 1));
+      if (activeTab < experienceByYear.length - 1) {
+        setDirection('right');
+        setActiveTab(prev => prev + 1);
+      }
     } else if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      setActiveTab(prev => Math.max(prev - 1, 0));
+      if (activeTab > 0) {
+        setDirection('left');
+        setActiveTab(prev => prev - 1);
+      }
     }
-  }, [experienceData.length]);
+  }, [activeTab, experienceByYear.length]);
 
-  // Enhanced resume download handling
+  // Enhanced resume download handling with analytics
   const handleDownloadResume = useCallback((e) => {
-    // You can add analytics tracking here
-    console.log('Resume download initiated');
-    // If you have an actual file, you can use:
-    // window.open('/path-to-resume.pdf', '_blank');
+    e.preventDefault();
+    // Add analytics tracking
+    if (window.gtag) {
+      window.gtag('event', 'download', {
+        'event_category': 'Resume',
+        'event_label': 'Resume PDF Download',
+        'value': 1
+      });
+    }
+    // Replace with actual resume URL
+    window.open('/assets/documents/professional-resume.pdf', '_blank');
   }, []);
+
+  // Go to next/previous experience
+  const navigateExperience = useCallback((direction) => {
+    setDirection(direction);
+    if (direction === 'right' && activeTab < experienceByYear.length - 1) {
+      setActiveTab(prev => prev + 1);
+    } else if (direction === 'left' && activeTab > 0) {
+      setActiveTab(prev => prev - 1);
+    }
+  }, [activeTab, experienceByYear.length]);
 
   return (
     <section id="experience" className="experience-section py-5">
@@ -234,30 +314,30 @@ function Experience() {
             <div className="experience-heading sticky-top sticky-offset">
               <div className="section-tag">
                 <div className="red-line"></div>
-                <span>Career Path</span>
+                <span>Professional Journey</span>
               </div>
 
               <h2 className="section-title">
-                My Professional <span className="text-highlight">Experience</span>
+                My <span className="text-highlight">Career</span> Progression
               </h2>
 
               <p className="section-description">
-                Over the past decade, I've built expertise across the digital marketing landscape,
-                consistently delivering exceptional results for businesses looking to scale their
-                online presence and revenue streams.
+                Over {experienceData.length > 10 ? '10+' : experienceData.length} years in digital marketing, I've developed expertise in strategy development, campaign execution, and performance optimization. My career spans various industries, consistently delivering exceptional results for businesses seeking to enhance their digital presence and revenue streams.
               </p>
 
               <div className="experience-cta">
                 <a 
-                  href="#resume" 
+                  href="/assets/documents/professional-resume.pdf" 
                   className="btn btn-outline-primary"
                   onClick={handleDownloadResume}
                   aria-label="Download my resume in PDF format"
+                  download
                 >
-                  <i className="fas fa-file-download me-2" aria-hidden="true"></i> Download Resume
+                  <i className="fas fa-file-download me-2" aria-hidden="true"></i> Download CV
                 </a>
               </div>
 
+             
             </div>
           </motion.div>
 
@@ -275,63 +355,80 @@ function Experience() {
                 role="tablist"
                 aria-label="Experience timeline by year"
               >
-                {experienceData.map((experience, index) => (
+                {experienceByYear.map((yearGroup, index) => (
                   <button
-                    key={index}
+                    key={yearGroup.year}
                     id={`tab-${index}`}
                     className={`tab-button ${activeTab === index ? 'active' : ''}`}
-                    onClick={() => setActiveTab(index)}
+                    onClick={() => {
+                      setDirection(index > activeTab ? 'right' : 'left');
+                      setActiveTab(index);
+                    }}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     role="tab"
                     aria-selected={activeTab === index}
                     aria-controls={`tab-panel-${index}`}
                     tabIndex={activeTab === index ? 0 : -1}
                   >
-                    {experience.year}
+                    {yearGroup.year}
                   </button>
                 ))}
               </div>
 
-              {/* Tab Content - Now rendering all items but only showing active */}
+              {/* Tab Content with proper animation direction */}
               <div className="tab-content-wrapper">
-                {experienceData.map((experience, index) => (
-                  <div
-                    key={index}
-                    role="tabpanel"
-                    id={`tab-panel-${index}`}
-                    aria-labelledby={`tab-${index}`}
-                    className={`tab-content ${activeTab === index ? 'active' : 'hidden'}`}
-                    hidden={activeTab !== index}
-                  >
-                    <TimelineItem 
-                      experience={experience} 
-                      isActive={activeTab === index} 
-                    />
-                  </div>
-                ))}
+                <AnimatePresence mode="wait" initial={false}>
+                  {experienceByYear[activeTab] && experienceByYear[activeTab].entries.map((experience, idx) => (
+                    <motion.div
+                      key={`${experience.position}-${idx}`}
+                      initial={{ 
+                        opacity: 0, 
+                        x: direction === 'right' ? 50 : -50 
+                      }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ 
+                        opacity: 0, 
+                        x: direction === 'right' ? -50 : 50 
+                      }}
+                      transition={{ duration: 0.4 }}
+                      role="tabpanel"
+                      id={`tab-panel-${activeTab}-${idx}`}
+                      aria-labelledby={`tab-${activeTab}`}
+                      className="tab-content"
+                    >
+                      <TimelineItem 
+                        experience={experience} 
+                        isActive={true} 
+                      />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
               
-              {/* Progress indicator */}
+              {/* Interactive Progress indicator */}
               <div className="progress-nav">
                 <div className="progress-bar-container">
                   <div 
                     className="progress-bar" 
-                    style={{width: `${(activeTab / (experienceData.length - 1)) * 100}%`}}
+                    style={{width: `${(activeTab / (experienceByYear.length - 1)) * 100}%`}}
                   ></div>
                 </div>
                 <div className="progress-buttons">
                   <button 
                     className="progress-btn prev" 
-                    onClick={() => setActiveTab(prev => Math.max(prev - 1, 0))}
+                    onClick={() => navigateExperience('left')}
                     disabled={activeTab === 0}
                     aria-label="Previous experience"
                   >
                     <i className="fas fa-arrow-left" aria-hidden="true"></i>
                   </button>
+                  <span className="progress-indicator">
+                    {activeTab + 1} / {experienceByYear.length}
+                  </span>
                   <button 
                     className="progress-btn next" 
-                    onClick={() => setActiveTab(prev => Math.min(prev + 1, experienceData.length - 1))}
-                    disabled={activeTab === experienceData.length - 1}
+                    onClick={() => navigateExperience('right')}
+                    disabled={activeTab === experienceByYear.length - 1}
                     aria-label="Next experience"
                   >
                     <i className="fas fa-arrow-right" aria-hidden="true"></i>
