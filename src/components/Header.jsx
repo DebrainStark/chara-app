@@ -3,82 +3,112 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './Header.css';
 
+/**
+ * Header Component - Main navigation component for Chara Digital website
+ * Features responsive design, scroll-aware styling, and animated interactions
+ */
 const Header = () => {
+  // State management for scroll position and mobile menu
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
+  // Handle scroll events to update header appearance
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
     
+    // Add and clean up event listeners
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  // Toggle mobile menu state
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  // Animation variants for navigation items
+  const navItemAnimation = {
+    hover: { y: -3, transition: { duration: 0.2 } }
+  };
+  
+  // Animation variants for CTA button
+  const ctaAnimation = {
+    hover: { 
+      y: -3, 
+      boxShadow: '0 10px 20px rgba(255, 87, 51, 0.3)',
+      transition: { duration: 0.2 }
+    }
   };
 
   return (
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <div className="header-inner">
+          {/* Logo */}
           <div className="logo-container">
-            <Link to="/" className="logo-link">
-              <img src="/logo1.png" alt="Chara Digital" className="logo-image" />
+            <Link to="/" className="logo-link" aria-label="Chara Digital Home">
+              <img 
+                src="/logo1.png" 
+                alt="Chara Digital" 
+                className="logo-image" 
+                width="auto"
+                height="80"
+              />
             </Link>
           </div>
           
-          <div className="menu-toggle" onClick={toggleMenu}>
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="menu-toggle" 
+            onClick={toggleMenu}
+            aria-expanded={menuOpen}
+            aria-label="Toggle navigation menu"
+          >
             <div className={`hamburger ${menuOpen ? 'open' : ''}`}>
               <span></span>
               <span></span>
               <span></span>
             </div>
-          </div>
+          </button>
           
+          {/* Main Navigation */}
           <nav className={`main-nav ${menuOpen ? 'nav-open' : ''}`}>
             <ul className="nav-list">
-              <motion.li 
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link to="/" className="nav-link">Home</Link>
-              </motion.li>
-              <motion.li 
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link to="/about" className="nav-link">About</Link>
-              </motion.li>
-              <motion.li 
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link to="/services" className="nav-link">Services</Link>
-              </motion.li>
-              <motion.li 
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link to="/contact" className="nav-link">Contact</Link>
-              </motion.li>
+              {['Home', 'About', 'Services', 'Contact'].map((item) => (
+                <motion.li 
+                  key={item}
+                  whileHover={navItemAnimation.hover}
+                >
+                  <Link 
+                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} 
+                    className="nav-link"
+                  >
+                    {item}
+                  </Link>
+                </motion.li>
+              ))}
             </ul>
+            
+            {/* Mobile CTA (visible only in mobile menu) */}
+            <div className="mobile-cta">
+              <motion.a 
+                href="https://calendly.com/chara-digital-agency/discoverycall"
+                className="btn btn-header"
+                whileHover={ctaAnimation.hover}
+                rel="noopener noreferrer"
+              >
+                Book a Strategy Call
+              </motion.a>
+            </div>
           </nav>
           
+          {/* Desktop CTA */}
           <div className="header-cta">
             <motion.a 
               href="https://calendly.com/chara-digital-agency/discoverycall"
               className="btn btn-header"
-              whileHover={{ y: -3, boxShadow: '0 10px 20px rgba(255, 87, 51, 0.3)' }}
-              transition={{ duration: 0.2 }}
+              whileHover={ctaAnimation.hover}
+              rel="noopener noreferrer"
             >
               Book a Strategy Call
             </motion.a>

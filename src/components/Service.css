@@ -1,4 +1,6 @@
-/* ServicesSection.css */
+/* ServicesSection.css - Improved and optimized */
+
+/* Section spacing and general styles */
 .services-section, 
 .testimonials-section, 
 .clients-section, 
@@ -8,9 +10,6 @@
   padding: 100px 0;
 }
 
-.coll{
-    color: aliceblue
-}
 .py-lg-6 {
   padding-top: 5rem;
   padding-bottom: 5rem;

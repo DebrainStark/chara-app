@@ -1,5 +1,9 @@
-/* Header.css - Matches Hero theme */
-.site-header {
+/**
+ * Header.css - Professional styling for Chara Digital header
+ * Includes responsive design, animations, and accessibility considerations
+ */
+
+ .site-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,6 +28,7 @@
   justify-content: space-between;
 }
 
+/* Logo styling */
 .logo-container {
   flex: 0 0 auto;
 }
@@ -38,10 +43,12 @@
 }
 
 .logo-image {
-  height: 80px;
+  height: 50px;
   width: auto;
+  max-width: 100%;
 }
 
+/* Main navigation */
 .main-nav {
   flex: 1 1 auto;
   display: flex;
@@ -78,14 +85,18 @@
   transition: width 0.3s ease;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
   color: #ff5733;
+  outline: none;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link:focus::after {
   width: 100%;
 }
 
+/* CTA button styling */
 .header-cta {
   flex: 0 0 auto;
 }
@@ -94,21 +105,27 @@
   background-color: transparent;
   border: 2px solid rgba(255, 87, 51, 0.7);
   color: white;
-  padding: 10px 22px;
+  padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-decoration: none;
   transition: all 0.3s ease;
   display: inline-block;
+  text-align: center;
 }
 
-.btn-header:hover {
+.btn-header:hover,
+.btn-header:focus {
   background-color: #ff5733;
   border-color: #ff5733;
   color: white;
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(255, 87, 51, 0.25);
 }
 
+/* Mobile menu toggle */
 .menu-toggle {
   display: none;
   cursor: pointer;
@@ -116,6 +133,9 @@
   height: 30px;
   position: relative;
   z-index: 1001;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .hamburger {
@@ -146,6 +166,18 @@
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
+/* Mobile CTA - hidden by default */
+.mobile-cta {
+  display: none;
+}
+
+/* Responsive styling */
+@media (max-width: 1199.98px) {
+  .nav-list {
+    gap: 30px;
+  }
+}
+
 @media (max-width: 991.98px) {
   .menu-toggle {
     display: block;
@@ -159,10 +191,13 @@
     height: 100vh;
     background-color: #0a0a0a;
     padding: 80px 30px 30px;
-    transition: right 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 1000;
     box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
     border-left: 1px solid rgba(255, 255, 255, 0.05);
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
   }
   
   .main-nav.nav-open {
@@ -172,6 +207,7 @@
   .nav-list {
     flex-direction: column;
     gap: 20px;
+    width: 100%;
   }
   
   .nav-link {
@@ -185,8 +221,19 @@
   }
   
   .btn-header {
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+  
+  .mobile-cta {
+    display: block;
+    margin-top: 30px;
+    width: 100%;
+  }
+  
+  .mobile-cta .btn-header {
+    width: 100%;
+    display: block;
   }
 }
 
@@ -196,31 +243,11 @@
   }
   
   .logo-image {
-    height: 35px;
+    height: 40px;
   }
   
   .header-cta {
     display: none;
-  }
-  
-  .nav-list {
-    margin-top: 20px;
-  }
-  
-  .main-nav.nav-open {
-    padding-top: 70px;
-  }
-  
-  .main-nav.nav-open .header-cta {
-    display: block;
-    margin: 30px 0 0 0;
-    width: 100%;
-  }
-  
-  .main-nav.nav-open .btn-header {
-    display: block;
-    text-align: center;
-    width: 100%;
   }
 }
 
@@ -230,10 +257,15 @@
   }
   
   .logo-image {
-    height: 30px;
+    height: 35px;
   }
   
   .main-nav {
     width: 100%;
+  }
+  
+  .btn-header {
+    padding: 10px 16px;
+    font-size: 14px;
   }
 }
