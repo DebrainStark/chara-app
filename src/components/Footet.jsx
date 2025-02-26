@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import './Footer.css'; // You'll need to create this CSS file
+import './styles/Footer.css'; // You'll need to create this CSS file
 
 const Footer = () => {
   // Animation variants
@@ -14,7 +14,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="site-footer bg-dark text-white position-relative">
+    <footer className="site-footer text-white position-relative">
         {/* Client criteria section */}
       <div className="client-criteria py-5" style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
         <div className="container">

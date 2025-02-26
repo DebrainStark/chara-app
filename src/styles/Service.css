@@ -1,5 +1,3 @@
-/* ServicesSection.css - Improved and optimized */
-
 /* Section spacing and general styles */
 .services-section, 
 .testimonials-section, 
@@ -114,6 +112,10 @@
 }
 
 /* Testimonial Cards */
+.testimonials-section{
+background-color: #030027;
+}
+
 .testimonial-card {
   background-color: white;
   border-radius: 16px;
@@ -208,6 +210,10 @@
 }
 
 /* Strategy Cards */
+.strategy-section{
+  background-color: #030027;
+}
+
 .strategy-card {
   position: relative;
   background-color: white;

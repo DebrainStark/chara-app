@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import './Partner.css'; // You'll need to create this CSS file
+import './styles/Partner.css'; // You'll need to create this CSS file
 
 const PartnerSection = () => {
   // Animation variants

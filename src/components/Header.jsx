@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import './Header.css';
+import './styles/Header.css';
 
 /**
  * Header Component - Main navigation component for Chara Digital website

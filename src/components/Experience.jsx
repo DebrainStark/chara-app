@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, memo, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Experience.css';
+import './styles/Experience.css';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 

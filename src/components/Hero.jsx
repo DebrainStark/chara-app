@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Hero.css';
+import './styles/Hero.css';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Hero = () => {

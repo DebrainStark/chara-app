@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './AboutMe.css';
+import './styles/AboutMe.css';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
