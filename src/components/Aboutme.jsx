@@ -86,7 +86,7 @@ function AboutMe() {
                 {/* Heading */}
                 <motion.h2 
                   variants={fadeInUp} 
-                  className="section-title mb-4"
+                  className="section-title mb-4 text-dark"
                 >
                   Driving Growth Through <span className="highlight">Strategic Digital Marketing</span>
                 </motion.h2>
