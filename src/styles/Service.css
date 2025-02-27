@@ -189,10 +189,8 @@ background-color: #030027;
 
 /* Client Logos */
 .client-logo {
-  background-color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   filter: grayscale(100%);
   opacity: 0.7;
@@ -206,7 +204,6 @@ background-color: #030027;
   filter: grayscale(0%);
   opacity: 1;
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Strategy Cards */
