@@ -317,7 +317,7 @@ function Experience() {
                 <span>Professional Journey</span>
               </div>
 
-              <h2 className="section-title">
+              <h2 className="section-title text-light">
                 My <span className="text-highlight">Career</span> Progression
               </h2>
 
