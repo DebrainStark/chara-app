@@ -5,6 +5,25 @@
 
  .site-header {
   position: fixed;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Home page header before scrolling */
+.site-header:not(.scrolled):not(.non-home-page) {
+  background-color: transparent; /* or whatever your initial background is */
+}
+
+/* Scrolled header on home page and all non-home pages */
+.site-header.scrolled,
+.site-header.non-home-page {
+  background-color: #000000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+ .site-header {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

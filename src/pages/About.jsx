@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import { Helmet } from 'react-helmet'; // For SEO metadata
+import NavBar from '../components/Header'; // Assuming you have a navigation component
+import Footer from '../components/Footet'; // Assuming you have a footer component
 import './About.css';
 
 function AboutPage() {
   const controls = useAnimation();
   const [ref, inView] = useInView({
-    threshold: 0.2,
+    threshold: 0.3,
     triggerOnce: true
   });
 
@@ -37,456 +40,242 @@ function AboutPage() {
   };
 
   return (
-    <div className="about-page-wrapper">
-      {/* Hero Section */}
-      <section className="about-hero">
-        <div className="shape-circle"></div>
-        <div className="shape-square"></div>
-        <Container>
-          <Row className="align-items-center">
-            <Col lg={6}>
+    <>
+      <Helmet>
+        <title>About Me | Strategic Digital Marketing Expert</title>
+        <meta name="description" content="Learn about my 10+ years of experience in strategic digital marketing and how I help premium brands grow through data-driven campaigns." />
+      </Helmet>
+    
+      
+      <main>
+        {/* Hero Section */}
+        <section className="about-hero py-5 ">
+          <div className="container text-center py-5">
+            <motion.h1 
+              initial={{ opacity: 0, y: -20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.6 }}
+              className="display-4 fw-bold mb-3"
+            >
+              About <span className="text-primary">Me</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="lead col-md-8 mx-auto"
+            >
+              Helping premium brands stand out in the digital landscape through strategic marketing and data-driven campaigns.
+            </motion.p>
+          </div>
+        </section>
+        
+        {/* Main About Section */}
+        <section id="about" className="about-section py-5 bg-light">
+          {/* Background Shape */}
+          <div className="shape-blob"></div>
+          
+          <div className="container py-4">
+            <div className="row align-items-center">
+              {/* Image Column */}
               <motion.div 
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="hero-content"
-              >
-                <h1 className="display-4 fw-bold">Our <span className="highlight">Story</span></h1>
-                <p className="lead mt-4">
-                  We're a team of passionate digital marketers dedicated to helping businesses thrive 
-                  in the ever-evolving digital landscape. With data-driven strategies and creative 
-                  expertise, we transform digital presence into measurable growth.
-                </p>
-                <div className="mt-5">
-                  <Button variant="primary" size="lg" className="rounded-pill me-3">
-                    Our Process
-                  </Button>
-                  <Button variant="outline-secondary" size="lg" className="rounded-pill">
-                    Meet The Team
-                  </Button>
-                </div>
-              </motion.div>
-            </Col>
-            <Col lg={6}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="hero-image-container"
-              >
-                <div className="pattern-background"></div>
-                <div className="hero-image">
-                  <img src="team-meeting.jpg" alt="Our team collaborating" className="img-fluid" />
-                </div>
-              </motion.div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
-      {/* Mission & Values Section */}
-      <section className="mission-section" ref={ref}>
-        <Container>
-          <Row className="justify-content-center text-center mb-5">
-            <Col lg={8}>
-              <motion.div
-                variants={fadeInUp}
-                initial="hidden"
+                ref={ref}
                 animate={controls}
+                initial="hidden"
+                variants={fadeInUp}
+                className="col-lg-5 mb-5 mb-lg-0 position-relative"
               >
-                <div className="section-label mx-auto">
-                  <div className="accent-line"></div>
-                  <span>OUR MISSION</span>
+                <div className="about-image-wrapper">
+                  <div className="image-border"></div>
+                  <div className="about-image">
+                    <img 
+                      src="Chara1.JPG" 
+                      alt="Marketing Strategist" 
+                      className="img-fluid rounded-3 shadow"
+                    />
+                  </div>
+                  <div className="experience-badge">
+                    <span className="years">10+</span>
+                    <span className="text">Years Experience</span>
+                  </div>
                 </div>
-                <h2 className="section-title">Empowering Brands to <span className="highlight">Succeed Digitally</span></h2>
-                <p className="lead-text">
-                  We believe that every business deserves a strong digital presence. Our mission is to provide cutting-edge marketing solutions that drive real results and help our clients outperform their competition.
-                </p>
               </motion.div>
-            </Col>
-          </Row>
-
-          <motion.div
-            variants={staggerItems}
-            initial="hidden"
-            animate={controls}
-          >
-            <Row className="values-row">
-              <Col md={4}>
-                <motion.div variants={fadeInUp} className="value-card">
-                  <div className="value-icon">
-                    <i className="fas fa-chart-line"></i>
+              
+              {/* Content Column */}
+              <div className="col-lg-7">
+                <div className="about-content ps-lg-5">
+                  <motion.div
+                    ref={ref}
+                    animate={controls}
+                    initial="hidden"
+                    variants={staggerItems}
+                    className="content-wrapper"
+                  >
+                    {/* Section Label */}
+                    <motion.div variants={fadeInUp} className="section-label">
+                      <div className="accent-line"></div>
+                      <span>About Me</span>
+                    </motion.div>
+                    
+                    {/* Heading */}
+                    <motion.h2 
+                      variants={fadeInUp} 
+                      className="section-title mb-3"
+                    >
+                      Strategic <span className="highlight">Digital Marketing</span> For Premium Brands
+                    </motion.h2>
+                    
+                    {/* Introduction */}
+                    <motion.p variants={fadeInUp} className="lead-text mb-4">
+                      With over <strong>10+ years of experience</strong>, I specialize in creating data-driven campaigns that deliver exceptional returns. I help business owners, coaches, and consultants who offer premium products and services grow through strategic digital marketing.
+                    </motion.p>
+                    
+                    {/* Core Services */}
+                    <motion.div variants={staggerItems} className="expertise-section">
+                      <motion.h5 variants={fadeInUp} className="expertise-title">
+                        Our Expertise
+                      </motion.h5>
+                      
+                      <ul className="expertise-list">
+                        <motion.li variants={fadeInUp} className="expertise-item">
+                          <div className="icon-wrapper">
+                            <i className="fas fa-chart-line"></i>
+                          </div>
+                          <div className="expertise-content">
+                            <h6>Strategic Media Buying</h6>
+                            <p>Platform-optimized campaigns that maximize ROI</p>
+                          </div>
+                        </motion.li>
+                        
+                        <motion.li variants={fadeInUp} className="expertise-item">
+                          <div className="icon-wrapper">
+                            <i className="fas fa-pen-fancy"></i>
+                          </div>
+                          <div className="expertise-content">
+                            <h6>Conversion Copywriting</h6>
+                            <p>Compelling narratives that drive action</p>
+                          </div>
+                        </motion.li>
+                        
+                        <motion.li variants={fadeInUp} className="expertise-item">
+                          <div className="icon-wrapper">
+                            <i className="fas fa-laptop-code"></i>
+                          </div>
+                          <div className="expertise-content">
+                            <h6>Optimization & Analytics</h6>
+                            <p>Data-driven decision making for continuous improvement</p>
+                          </div>
+                        </motion.li>
+                      </ul>
+                    </motion.div>
+                    
+                    {/* CTA */}
+                    <motion.div variants={fadeInUp} className="cta-wrapper">
+                      <a href="#contact" className="btn btn-primary btn-lg">
+                        Work With Me <i className="fas fa-arrow-right ms-2"></i>
+                      </a>
+                      <a href="#services" className="btn btn-outline-secondary btn-lg ms-3">
+                        Services
+                      </a>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Approach Section */}
+        <section className="approach-section py-5">
+          <div className="container py-4">
+            <div className="row justify-content-center text-center mb-5">
+              <div className="col-lg-8">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <div className="section-label mx-auto d-inline-flex">
+                    <div className="accent-line"></div>
+                    <span>My Approach</span>
                   </div>
-                  <h4>Data-Driven</h4>
-                  <p>We make decisions based on analytics and real-world metrics, not assumptions.</p>
+                  <h2 className="section-title">How I Create <span className="highlight">Results</span></h2>
+                  <p className="lead-text">My marketing methodology is built on three core principles that ensure your business achieves sustainable growth.</p>
                 </motion.div>
-              </Col>
-              <Col md={4}>
-                <motion.div variants={fadeInUp} className="value-card">
-                  <div className="value-icon">
-                    <i className="fas fa-lightbulb"></i>
-                  </div>
-                  <h4>Innovation</h4>
-                  <p>We constantly explore new strategies and technologies to keep our clients ahead of trends.</p>
+              </div>
+            </div>
+            
+            <div className="row g-4">
+              {/* Approach Step 1 */}
+              <div className="col-md-4">
+                <motion.div 
+                  className="approach-card h-100 p-4 rounded-3 shadow-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                  <div className="approach-number">01</div>
+                  <h4 className="approach-title">Strategic Planning</h4>
+                  <p>Every successful campaign begins with a data-informed strategy tailored to your specific business goals and target audience.</p>
                 </motion.div>
-              </Col>
-              <Col md={4}>
-                <motion.div variants={fadeInUp} className="value-card">
-                  <div className="value-icon">
-                    <i className="fas fa-hands-helping"></i>
-                  </div>
-                  <h4>Client Success</h4>
-                  <p>Your growth is our success. We're partners invested in your long-term objectives.</p>
+              </div>
+              
+              {/* Approach Step 2 */}
+              <div className="col-md-4">
+                <motion.div 
+                  className="approach-card h-100 p-4 rounded-3 shadow-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <div className="approach-number">02</div>
+                  <h4 className="approach-title">Creative Execution</h4>
+                  <p>Combining data insights with compelling creative to produce scroll-stopping content that resonates with your ideal customers.</p>
                 </motion.div>
-              </Col>
-            </Row>
-          </motion.div>
-        </Container>
-      </section>
-
-      {/* Journey/Timeline Section */}
-      <section className="journey-section">
-        <Container>
-          <Row className="justify-content-center mb-5">
-            <Col lg={8} className="text-center">
-              <div className="section-label mx-auto">
-                <div className="accent-line"></div>
-                <span>OUR JOURNEY</span>
               </div>
-              <h2 className="section-title">From Startup to <span className="highlight">Industry Leader</span></h2>
-            </Col>
-          </Row>
-
-          <div className="timeline">
-            <motion.div 
-              className="timeline-item"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              
+              {/* Approach Step 3 */}
+              <div className="col-md-4">
+                <motion.div 
+                  className="approach-card h-100 p-4 rounded-3 shadow-sm"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  <div className="approach-number">03</div>
+                  <h4 className="approach-title">Continuous Optimization</h4>
+                  <p>Relentless testing and refinement to maximize campaign performance and deliver the highest possible return on investment.</p>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        
+        {/* Final CTA Section */}
+        <section className="cta-section py-5 text-center">
+          <div className="container py-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>2013</h3>
-                <h4>The Beginning</h4>
-                <p>Founded with a vision to help small businesses leverage digital marketing effectively.</p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="timeline-item right"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>2016</h3>
-                <h4>Team Expansion</h4>
-                <p>Grew to a team of 10 specialists, adding expertise in social media, SEO, and content marketing.</p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="timeline-item"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>2019</h3>
-                <h4>Agency Recognition</h4>
-                <p>Recognized as a top digital marketing agency, winning our first industry awards.</p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="timeline-item right"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>2022</h3>
-                <h4>Global Expansion</h4>
-                <p>Expanded our services internationally, helping clients across 15+ countries.</p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="timeline-item"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <h3>Today</h3>
-                <h4>Industry Leaders</h4>
-                <p>Now a team of 30+ specialists delivering cutting-edge marketing solutions globally.</p>
-              </div>
+              <h2 className="mb-4">Ready to Transform Your Digital Presence?</h2>
+              <p className="lead mb-4 col-lg-8 mx-auto">Let's discuss how my strategic approach to digital marketing can help your business achieve sustainable growth.</p>
+              <a href="#contact" className="btn btn-primary btn-lg px-5 py-3">
+                Schedule a Strategy Call <i className="fas fa-arrow-right ms-2"></i>
+              </a>
             </motion.div>
           </div>
-        </Container>
-      </section>
-
-      {/* Team Section */}
-      <section className="team-section">
-        <Container>
-          <Row className="justify-content-center mb-5">
-            <Col lg={8} className="text-center">
-              <div className="section-label mx-auto">
-                <div className="accent-line"></div>
-                <span>OUR EXPERTS</span>
-              </div>
-              <h2 className="section-title">Meet the <span className="highlight">Talented Team</span></h2>
-              <p className="lead-text">
-                Our success is driven by a diverse team of passionate experts who combine creativity with technical knowledge to deliver exceptional results.
-              </p>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col lg={3} md={6} className="mb-4">
-              <motion.div 
-                className="team-card"
-                whileHover={{ y: -10 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-              >
-                <div className="team-image">
-                  <img src="team-member1.jpg" alt="Team Member" className="img-fluid" />
-                  <div className="social-links">
-                    <a href="#"><i className="fab fa-linkedin"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                  </div>
-                </div>
-                <div className="team-info">
-                  <h5>Jessica Chen</h5>
-                  <p>Founder & CEO</p>
-                </div>
-              </motion.div>
-            </Col>
-
-            <Col lg={3} md={6} className="mb-4">
-              <motion.div 
-                className="team-card"
-                whileHover={{ y: -10 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
-                <div className="team-image">
-                  <img src="team-member2.jpg" alt="Team Member" className="img-fluid" />
-                  <div className="social-links">
-                    <a href="#"><i className="fab fa-linkedin"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                  </div>
-                </div>
-                <div className="team-info">
-                  <h5>Michael Torres</h5>
-                  <p>Creative Director</p>
-                </div>
-              </motion.div>
-            </Col>
-
-            <Col lg={3} md={6} className="mb-4">
-              <motion.div 
-                className="team-card"
-                whileHover={{ y: -10 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-              >
-                <div className="team-image">
-                  <img src="team-member3.jpg" alt="Team Member" className="img-fluid" />
-                  <div className="social-links">
-                    <a href="#"><i className="fab fa-linkedin"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                  </div>
-                </div>
-                <div className="team-info">
-                  <h5>Sarah Williams</h5>
-                  <p>Head of Strategy</p>
-                </div>
-              </motion.div>
-            </Col>
-
-            <Col lg={3} md={6} className="mb-4">
-              <motion.div 
-                className="team-card"
-                whileHover={{ y: -10 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-              >
-                <div className="team-image">
-                  <img src="team-member4.jpg" alt="Team Member" className="img-fluid" />
-                  <div className="social-links">
-                    <a href="#"><i className="fab fa-linkedin"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                  </div>
-                </div>
-                <div className="team-info">
-                  <h5>David Park</h5>
-                  <p>Technical Lead</p>
-                </div>
-              </motion.div>
-            </Col>
-          </Row>
-
-          <Row className="justify-content-center mt-4">
-            <Col md={6} className="text-center">
-              <Button variant="outline-primary" size="lg" className="rounded-pill">
-                View Full Team <i className="fas fa-arrow-right ms-2"></i>
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
-      {/* Testimonials & Achievements */}
-      <section className="testimonials-section bg-light">
-        <Container>
-          <Row>
-            <Col lg={6}>
-              <div className="section-label">
-                <div className="accent-line"></div>
-                <span>TESTIMONIALS</span>
-              </div>
-              <h2 className="section-title mb-4">What Our <span className="highlight">Clients Say</span></h2>
-              
-              <div className="testimonial-card">
-                <div className="quote-icon">
-                  <i className="fas fa-quote-left"></i>
-                </div>
-                <p className="testimonial-text">
-                  "Working with this team transformed our digital strategy completely. Our leads increased by 200% within just 3 months of implementing their recommendations."
-                </p>
-                <div className="client-info">
-                  <img src="client1.jpg" alt="Client" className="client-image" />
-                  <div>
-                    <h5>Robert Johnson</h5>
-                    <p>CEO, TechSolutions Inc.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="testimonial-card mt-4">
-                <div className="quote-icon">
-                  <i className="fas fa-quote-left"></i>
-                </div>
-                <p className="testimonial-text">
-                  "Their strategic approach to social media marketing helped us reach entirely new audiences. The ROI we've seen has been exceptional."
-                </p>
-                <div className="client-info">
-                  <img src="client2.jpg" alt="Client" className="client-image" />
-                  <div>
-                    <h5>Amanda Lewis</h5>
-                    <p>Marketing Director, StyleHub</p>
-                  </div>
-                </div>
-              </div>
-            </Col>
-            
-            <Col lg={6}>
-              <div className="section-label mt-5 mt-lg-0">
-                <div className="accent-line"></div>
-                <span>ACHIEVEMENTS</span>
-              </div>
-              <h2 className="section-title mb-4">Our <span className="highlight">Impact</span> By Numbers</h2>
-              
-              <Row>
-                <Col md={6}>
-                  <motion.div 
-                    className="achievement-card"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <h3 className="achievement-number">250+</h3>
-                    <p>Clients Worldwide</p>
-                  </motion.div>
-                </Col>
-                <Col md={6}>
-                  <motion.div 
-                    className="achievement-card"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.1 }}
-                  >
-                    <h3 className="achievement-number">$50M+</h3>
-                    <p>Revenue Generated</p>
-                  </motion.div>
-                </Col>
-                <Col md={6}>
-                  <motion.div 
-                    className="achievement-card"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.2 }}
-                  >
-                    <h3 className="achievement-number">15+</h3>
-                    <p>Industry Awards</p>
-                  </motion.div>
-                </Col>
-                <Col md={6}>
-                  <motion.div 
-                    className="achievement-card"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.3 }}
-                  >
-                    <h3 className="achievement-number">98%</h3>
-                    <p>Client Retention</p>
-                  </motion.div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+        </section>
+      </main>
       
-      {/* Call to Action */}
-      <section className="cta-section">
-        <Container>
-          <Row className="justify-content-center">
-            <Col lg={10} className="text-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="cta-box"
-              >
-                <h2>Ready to Transform Your Digital Marketing?</h2>
-                <p className="lead mt-3 mb-4">
-                  Let's discuss how our expertise can help your business achieve its goals.
-                </p>
-                <Button variant="light" size="lg" className="rounded-pill">
-                  Schedule a Strategy Call <i className="fas fa-arrow-right ms-2"></i>
-                </Button>
-              </motion.div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </div>
+    </>
   );
 }
 

@@ -1,27 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './styles/Header.css';
 
 /**
  * Header Component - Main navigation component for Chara Digital website
- * Features responsive design, scroll-aware styling, and animated interactions
+ * Features responsive design, scroll-aware styling only on home page, and animated interactions
  */
 const Header = () => {
   // State management for scroll position and mobile menu
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
-  // Handle scroll events to update header appearance
+  // Get current location to determine if we're on the home page
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  
+  // Handle scroll events to update header appearance (only for home page)
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (isHomePage) {
+        setScrolled(window.scrollY > 50);
+      } else {
+        // Always set scrolled to true for non-home pages to keep the black background
+        setScrolled(true);
+      }
     };
+    
+    // Set initial scroll state
+    handleScroll();
     
     // Add and clean up event listeners
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage]); // Added isHomePage as dependency
   
   // Toggle mobile menu state
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -41,7 +53,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`site-header ${scrolled ? 'scrolled' : ''} ${!isHomePage ? 'non-home-page' : ''}`}>
       <div className="container">
         <div className="header-inner">
           {/* Logo */}
